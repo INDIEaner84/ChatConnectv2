@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="50%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#818cf8" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded rectangle -->
+  <rect width="512" height="512" rx="112" fill="url(#grad1)" />
+  
+  <!-- Outer subtle circuit rings -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="8 8" opacity="0.4" />
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#818cf8" stroke-width="1.5" opacity="0.25" />
+
+  <!-- Chat Connect Peer Hexagonal Shield / Message Symbol -->
+  <path d="M140 180 C140 140 170 120 220 120 L292 120 C342 120 372 140 372 180 L372 260 C372 300 342 320 292 320 L230 320 L160 370 L175 320 L140 320 C140 320 140 300 140 260 Z"
+        fill="url(#grad2)"
+        filter="url(#glow)"
+        opacity="0.95" />
+
+  <!-- Inner peer network nodes -->
+  <circle cx="210" cy="220" r="18" fill="#ffffff" />
+  <circle cx="260" cy="200" r="14" fill="#38bdf8" />
+  <circle cx="305" cy="235" r="16" fill="#ffffff" />
+
+  <!-- Connecting data links -->
+  <line x1="210" y1="220" x2="260" y2="200" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+  <line x1="260" y1="200" x2="305" y2="235" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+  <line x1="210" y1="220" x2="305" y2="235" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="4 4" />
+
+  <!-- Sub-label brand glyph indicator -->
+  <rect x="206" y="420" width="100" height="8" rx="4" fill="#38bdf8" opacity="0.8" />
+</svg>

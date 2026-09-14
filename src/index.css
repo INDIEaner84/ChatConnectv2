@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+/* Base Default Root Theme */
+:root {
+  --bg-main: #0c0407;
+  --bg-sidebar: #13070c;
+  --bg-card: #180910;
+  --bg-active: #280e1a;
+  --bg-hover: #220b16;
+  --border-color: #381423;
+  --text-primary: #fce7f3;
+  --text-secondary: #f472b6;
+  --text-tertiary: #9d4872;
+  --accent-neon: #ff1e44;
+  --accent-glow: rgba(255, 30, 68, 0.45);
+  --accent-subtle: rgba(255, 30, 68, 0.12);
+  --theme-kanji: "アキラ // 赤";
+}
+
+/* 1. AKIRA CAPSULE RED (Default Dark Cyberpunk) */
+[data-akira-theme="akira-red"] {
+  --bg-main: #0a0306;
+  --bg-sidebar: #12060b;
+  --bg-card: #17080f;
+  --bg-active: #2d0e1b;
+  --bg-hover: #220b15;
+  --border-color: #3d1424;
+  --text-primary: #fff1f2;
+  --text-secondary: #fda4af;
+  --text-tertiary: #9f1239;
+  --accent-neon: #ff1e44;
+  --accent-glow: rgba(255, 30, 68, 0.45);
+  --accent-subtle: rgba(255, 30, 68, 0.12);
+}
+
+/* 2. MATRIX HUD GREEN */
+[data-akira-theme="cyber-green"] {
+  --bg-main: #020f07;
+  --bg-sidebar: #05180d;
+  --bg-card: #082112;
+  --bg-active: #0d381f;
+  --bg-hover: #0b2d19;
+  --border-color: #124d2b;
+  --text-primary: #f0fdf4;
+  --text-secondary: #86efac;
+  --text-tertiary: #166534;
+  --accent-neon: #00ff66;
+  --accent-glow: rgba(0, 255, 102, 0.45);
+  --accent-subtle: rgba(0, 255, 102, 0.12);
+}
+
+/* 3. NEO-TOKYO CYAN */
+[data-akira-theme="neo-cyan"] {
+  --bg-main: #030d18;
+  --bg-sidebar: #061527;
+  --bg-card: #091e36;
+  --bg-active: #0f3259;
+  --bg-hover: #0c2747;
+  --border-color: #16467a;
+  --text-primary: #f0f9ff;
+  --text-secondary: #7dd3fc;
+  --text-tertiary: #075985;
+  --accent-neon: #00f0ff;
+  --accent-glow: rgba(0, 240, 255, 0.45);
+  --accent-subtle: rgba(0, 240, 255, 0.12);
+}
+
+/* 4. KANEDA HAZARD GOLD / AMBER */
+[data-akira-theme="kaneda-amber"] {
+  --bg-main: #120b02;
+  --bg-sidebar: #1c1204;
+  --bg-card: #261906;
+  --bg-active: #402b0c;
+  --bg-hover: #33220a;
+  --border-color: #593c12;
+  --text-primary: #fffbeb;
+  --text-secondary: #fde68a;
+  --text-tertiary: #92400e;
+  --accent-neon: #ffb800;
+  --accent-glow: rgba(255, 184, 0, 0.45);
+  --accent-subtle: rgba(255, 184, 0, 0.12);
+}
+
+/* 5. TETSUO PSYCHIC ULTRAVIOLET */
+[data-akira-theme="tetsuo-purple"] {
+  --bg-main: #0c0316;
+  --bg-sidebar: #150626;
+  --bg-card: #1c0933;
+  --bg-active: #321159;
+  --bg-hover: #260d45;
+  --border-color: #491a82;
+  --text-primary: #faf5ff;
+  --text-secondary: #d8b4fe;
+  --text-tertiary: #6b21a8;
+  --accent-neon: #b026ff;
+  --accent-glow: rgba(176, 38, 255, 0.45);
+  --accent-subtle: rgba(176, 38, 255, 0.12);
+}
+
+/* 6. SOLAR WHITE TECH */
+[data-akira-theme="solar-light"] {
+  --bg-main: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-active: #f1f5f9;
+  --bg-hover: #e2e8f0;
+  --border-color: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-tertiary: #64748b;
+  --accent-neon: #e11d48;
+  --accent-glow: rgba(225, 29, 72, 0.25);
+  --accent-subtle: rgba(225, 29, 72, 0.08);
+}
+
+body, html {
+  margin: 0;
+  height: 100%;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  /* Cyberpunk Tech Grid */
+  background-image: 
+    linear-gradient(var(--border-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center center;
+}
+
+/* CRT Scanlines Overlay Class */
+.akira-scanlines {
+  position: relative;
+}
+.akira-scanlines::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 40;
+  background-size: 100% 3px, 4px 100%;
+  pointer-events: none;
+}
+
+/* Akira Chamfered Angles and Glows */
+.akira-clip-corner {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.akira-glow-box {
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.akira-glow-text {
+  text-shadow: 0 0 8px var(--accent-neon);
+}
+
+/* Custom Cyberpunk Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-sidebar);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-neon);
+}

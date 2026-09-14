@@ -1,0 +1,6 @@
+{
+  "name": "MUSCAL Personal Assistant",
+  "description": "Chat Connect - A local-first PWA messenger and modular MUSCAL runtime platform with zero-trust peer identity, QR verification, offline messaging, and diagnostics.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

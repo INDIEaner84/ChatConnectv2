@@ -1,0 +1,64 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidMessage(data) {
+      return data.keys().hasAll(['text', 'userId', 'createdAt']) && 
+             data.keys().size() == 3 &&
+             data.text is string && data.text.size() <= 5000 &&
+             data.userId is string && data.userId.size() <= 128 &&
+             data.createdAt == request.time;
+    }
+
+    match /messages/{messageId} {
+      // Basic rules for the placeholder messages
+      allow read: if true; // In a real app we'd restrict this
+      allow create: if isValidId(messageId) && isValidMessage(incoming());
+      allow update: if false; // Messages are immutable
+      allow delete: if false;
+    }
+
+    function isValidSignal(data) {
+      let hasRequired = data.keys().hasAll(['type', 'sourceDeviceId', 'targetDeviceId', 'createdAt']);
+      let hasSdp = data.keys().hasAny(['sdp']);
+      let hasCandidate = data.keys().hasAny(['candidate']);
+      
+      let validTypes = data.type is string && data.type.size() <= 50;
+      let validSource = data.sourceDeviceId is string && data.sourceDeviceId.size() <= 100;
+      let validTarget = data.targetDeviceId is string && data.targetDeviceId.size() <= 100;
+      let validTime = data.createdAt == request.time;
+
+      return hasRequired && validTypes && validSource && validTarget && validTime;
+    }
+
+    match /signals/{signalId} {
+      // Allow a device to read signals intended for them. In this demo, we allow anyone to read.
+      allow list: if true; 
+      allow get: if true;
+      allow create: if isValidId(signalId) && isValidSignal(incoming());
+      allow delete: if true; // Devices delete their signals after processing
+      allow update: if false; // Signals shouldn't be updated
+    }
+
+    match /rag_sources/{sourceId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
